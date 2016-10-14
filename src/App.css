@@ -1,5 +1,14 @@
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css';
+
+/* Global */
+
+/* App */
+
 .App {
   text-align: center;
+  max-width: 50%;
+  width: 100%;
+  margin: 40px auto;
 }
 
 .App-logo {
@@ -21,4 +30,129 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* Heroes */
+
+.heroes-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.hero-card {
+  margin: auto;
+  width: calc(100% * (1/4) - 10px - 1px);
+  padding-top: 24px;
+  padding-bottom: 24px;
+  position: relative;
+}
+
+.hero-img {
+  border-radius: 100%;
+  width: auto;
+  height: auto;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.hero-img.active {
+  opacity: .25;
+  background-color: white;
+}
+
+.hero-side {
+  position: absolute;
+  top: 120px;
+  left: 0px;
+  width: 100%;
+  visibility: hidden;
+  font-size: 20px;
+}
+
+.hero-side.active {
+  visibility: visible;
+}
+
+/* Search bar */
+
+.search-bar {
+  width: 100%;
+  position: relative;
+}
+
+.search-icon {
+  font-size: 32px;
+  position: absolute;
+  left: 0;
+  top: 12px;
+}
+
+.search-input {
+  width: 100%;
+  padding-top: 16px;
+  padding-left: 42px;
+  padding-bottom: 16px;
+  box-sizing: border-box;
+
+  border: none;
+  border-bottom: 4px solid black;
+  transition: border-bottom .3s linear;
+
+  font-size: 24px;
+}
+
+.search-input:focus {
+  border-bottom: 4px solid #FFCA28;
+  outline: 0;
+}
+
+.add-hero {
+  display: inline-block;
+  text-align: center;
+}
+
+.hero-input {
+  display: block;
+  /*width: 40%;*/
+  padding-top: 16px;
+  padding-left: 42px;
+  padding-bottom: 16px;
+  box-sizing: border-box;
+
+  border: none;
+  border-bottom: 4px solid black;
+  transition: border-bottom .3s linear;
+
+  font-size: 24px;
+}
+
+.hero-input:focus {
+  border-bottom: 4px solid #FFCA28;
+  outline: 0;
+}
+
+.hero-select {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.hero-add-btn {
+  text-decoration: none;
+  width: 100%;
+  margin-top: 20px;
+  padding: 3px 12px;
+  background-color: #FFC107;
+  color: black;
+  border-radius: 0px;
+  font-size: 24px;
+}
+
+.hero-add-btn:hover {
+  background-color: #FFCA28;
 }
