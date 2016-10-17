@@ -4,44 +4,35 @@ class SelectHero extends Component {
   constructor(props) {
     super(props);
 
-    let allImgs = [
-      '/heroes/boba.png',
-      '/heroes/c3po.png',
-      '/heroes/chewbakka.png',
-      '/heroes/leya.png',
-      '/heroes/luke.png',
-      '/heroes/palpatine.png',
-      '/heroes/r2d2.png',
-      '/heroes/solo.png',
-      '/heroes/stormtrooper.png',
-      '/heroes/vader.png',
-      '/heroes/yoda.png',
-    ];
+    this.handleChange = this.handleChange.bind(this);
 
-    // получили текущих героев
-    let displayedHeroes = this.props.displayedHeroes;
-    // получили текущие изображения героев
-    let displayedImgs = displayedHeroes.map(hero => {
-      return hero.image
-    });
-
-    // получили доступные изображения героев, которые ещё не использованы
-    let availableImages = allImgs.filter(image => {
-      return displayedImgs.indexOf(image) === -1;
-    });
-
-    // в качестве начального состояния указали не использованные изображения
     this.state = {
-      availableImages
+      selectedValue: ''
     }
   }
 
+  // здесь обработка onChange и вызов метода компонента HeroForm
+  handleChange(e) {
+    var self = this;
+    this.setState({
+        selectedValue: e.target.value
+      },
+      () => self.props.selectedValue(this.state.selectedValue)
+    );
+  }
+
   render() {
+    // получили невыведенных героев
+    let nonDisplayedHeroes = this.props.nonDisplayedHeroes;
+
     return(
-      <select className={this.props.name} ref="image">
+      <select
+        value={this.state.selectedValue}
+        onChange={this.handleChange}
+        className="hero-select">
         {
-          this.state.availableImages.map( (image) => {
-            return <option value={image}>{image}</option>;
+          nonDisplayedHeroes.map((hero) => {
+            return <option key={hero.id} value={hero.id}>{hero.name}</option>;
           })
         }
       </select>

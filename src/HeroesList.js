@@ -31,22 +31,25 @@ class HeroesList extends Component {
     });
   }
 
-  handleAddHeroClick(recieveData) {
-    recieveData.forEach( (el) => {
-      console.log(el);
-    });
+  handleAddHeroClick(e) {
+    console.log('click!');
   }
 
   render() {
-    const heroCards = this.state.displayedHeroes.map(hero =>
-      <HeroCard
-        key={hero.id}
-        name={hero.name}
-        first_appearance={hero.first_appearance}
-        image={hero.image}
-        side={hero.side}
-      />
-    );
+    const heroCards = this.state.displayedHeroes.map( hero => {
+      if (hero.isDisplayed) {
+        return (
+          <HeroCard
+            key={hero.id}
+            name={hero.name}
+            first_appearance={hero.first_appearance}
+            image={hero.image}
+            side={hero.side}
+          />
+        );
+      }
+    });
+
     return (
       <div>
         <SearchBar onSearch={this.handleSearch} />

@@ -7,44 +7,31 @@ class HeroForm extends Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.getSelectValue = this.getSelectValue.bind(this);
   }
 
+  // здесь обработка клика по кнопке и вызов метода компонента HeroesList
   handleClick(e) {
     e.preventDefault();
 
-    let formData = [];
-    formData.push(ReactDOM.findDOMNode(this.refs.name).value);
-    formData.push(ReactDOM.findDOMNode(this.refs.episode).value);
-    formData.push(ReactDOM.findDOMNode(this.refs.side).value);
-    formData.push(ReactDOM.findDOMNode(this.refs.image).value);
+    this.props.onClick();
+  }
 
-    this.props.onClick(formData);
+  // здесь я могу получить данные из селекта
+  getSelectValue(value) {
+    
   }
 
   render() {
+    let nonDisplayedHeroes = this.props.displayedHeroes.filter(hero => {
+        return !hero.isDisplayed;
+    });
+
     return (
       <form className="add-hero">
-        <input
-          className="hero-input"
-          type="text"
-          placeholder="Enter hero name"
-          ref="name"
-        />
-        <input
-          className="hero-input"
-          type="text"
-          placeholder="Enter episode"
-          ref="episode"
-        />
-        <input
-          className="hero-input"
-          type="text"
-          placeholder="Enter hero side"
-          ref="side"
-        />
         <SelectHero
-          displayedHeroes={this.props.displayedHeroes}
-          name="hero-select"
+          nonDisplayedHeroes={nonDisplayedHeroes}
+          selectedValue={this.getSelectValue}
         />
         <button className="hero-add-btn" onClick={this.handleClick}>
           Add Hero
