@@ -2,7 +2,7 @@ export const HEROES = [
   {
     id: 1,
     name: 'Darth Vader',
-    first_appearance: 'III Episode',
+    firstAppearance: 'III Episode',
     image: process.env.PUBLIC_URL + '/heroes/vader.png',
     side: 'Dark Side',
     isDisplayed: true
@@ -10,7 +10,7 @@ export const HEROES = [
   {
     id: 2,
     name: 'Yoda',
-    first_appearance: 'I Episode',
+    firstAppearance: 'I Episode',
     image: process.env.PUBLIC_URL + '/heroes/yoda.png',
     side: 'Light Side',
     isDisplayed: true
@@ -18,7 +18,7 @@ export const HEROES = [
   {
     id: 3,
     name: 'Stormtrooper',
-    first_appearance: 'IV Episode',
+    firstAppearance: 'IV Episode',
     image: process.env.PUBLIC_URL + '/heroes/stormtrooper.png',
     side: 'Dark Side',
     isDisplayed: true
@@ -26,7 +26,7 @@ export const HEROES = [
   {
     id: 4,
     name: 'C3P0',
-    first_appearance: 'I Episode',
+    firstAppearance: 'I Episode',
     image: process.env.PUBLIC_URL + '/heroes/c3po.png',
     side: 'Light Side',
     isDisplayed: true
@@ -34,7 +34,7 @@ export const HEROES = [
   {
     id: 5,
     name: 'Luke',
-    first_appearance: 'IV Episode',
+    firstAppearance: 'IV Episode',
     image: process.env.PUBLIC_URL + '/heroes/luke.png',
     side: 'Light Side',
     isDisplayed: true
@@ -42,7 +42,7 @@ export const HEROES = [
   {
     id: 6,
     name: 'Emperor Palpatine',
-    first_appearance: 'III Episode',
+    firstAppearance: 'III Episode',
     image: process.env.PUBLIC_URL + '/heroes/palpatine.png',
     side: 'Dark Side',
     isDisplayed: true
@@ -50,7 +50,7 @@ export const HEROES = [
   {
     id: 7,
     name: 'R2D2',
-    first_appearance: 'III Episode',
+    firstAppearance: 'III Episode',
     image: process.env.PUBLIC_URL + '/heroes/r2d2.png',
     side: 'Light Side',
     isDisplayed: true
@@ -58,7 +58,7 @@ export const HEROES = [
   {
     id: 8,
     name: 'Boba Fett',
-    first_appearance: 'II Episode',
+    firstAppearance: 'II Episode',
     image: process.env.PUBLIC_URL + '/heroes/boba.png',
     side: 'Dark Side',
     isDisplayed: true
@@ -66,7 +66,7 @@ export const HEROES = [
   {
     id: 9,
     name: 'Princess Leya',
-    first_appearance: 'IV Episode',
+    firstAppearance: 'IV Episode',
     image: process.env.PUBLIC_URL + '/heroes/leya.png',
     side: 'Light Side',
     isDisplayed: false
@@ -74,7 +74,7 @@ export const HEROES = [
   {
     id: 10,
     name: 'Han Solo',
-    first_appearance: 'IV Episode',
+    firstAppearance: 'IV Episode',
     image: process.env.PUBLIC_URL + '/heroes/solo.png',
     side: 'Light Side',
     isDisplayed: false
@@ -82,7 +82,7 @@ export const HEROES = [
   {
     id: 11,
     name: 'Chewbakka',
-    first_appearance: 'IV Episode',
+    firstAppearance: 'IV Episode',
     image: process.env.PUBLIC_URL + '/heroes/chewbakka.png',
     side: 'Light Side',
     isDisplayed: false

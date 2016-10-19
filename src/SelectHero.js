@@ -1,43 +1,49 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class SelectHero extends Component {
+class SelectHero extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      selectedValue: ''
-    }
+      selectedValue: '',
+    };
   }
 
-  // здесь обработка onChange и вызов метода компонента HeroForm
+  /**
+   * Handle <select> onChange event and call <HeroForm /> component's action.
+   */
   handleChange(e) {
-    var self = this;
+    const self = this;
     this.setState({
-        selectedValue: e.target.value
-      },
+      selectedValue: e.target.value,
+    },
       () => self.props.selectedValue(this.state.selectedValue)
     );
   }
 
   render() {
-    // получили невыведенных героев
-    let nonDisplayedHeroes = this.props.nonDisplayedHeroes;
+    /* get array of non-displayed heroes */
+    const nonDisplayedHeroes = this.props.nonDisplayedHeroes;
 
-    return(
+    return (
       <select
         value={this.state.selectedValue}
         onChange={this.handleChange}
         className="hero-select">
         {
-          nonDisplayedHeroes.map((hero) => {
-            return <option key={hero.id} value={hero.id}>{hero.name}</option>;
-          })
+          nonDisplayedHeroes.map(hero =>
+            <option key={hero.id} value={hero.id}>{hero.name}</option>
+          )
         }
       </select>
-    )
+    );
   }
 }
+
+SelectHero.propTypes = {
+  nonDisplayedHeroes: React.PropTypes.array,
+};
 
 export default SelectHero;

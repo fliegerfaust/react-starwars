@@ -1,38 +1,46 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import SelectHero from './SelectHero';
 
-class HeroForm extends Component {
+class HeroForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
     this.getSelectValue = this.getSelectValue.bind(this);
+
+    this.state = {
+      heroIdToAdd: '',
+    };
   }
 
-  // здесь обработка клика по кнопке и вызов метода компонента HeroesList
+  /**
+   * Get data from <SelectHero /> component.
+   */
+  getSelectValue(value) {
+    this.setState({
+      heroIdToAdd: value,
+    });
+  }
+
+  /**
+   * Handle button onClick event and call <HeroesList /> component's action.
+   */
   handleClick(e) {
     e.preventDefault();
 
-    this.props.onClick();
-  }
-
-  // здесь я могу получить данные из селекта
-  getSelectValue(value) {
-    
+    this.props.onClick(this.state.heroIdToAdd);
   }
 
   render() {
-    let nonDisplayedHeroes = this.props.displayedHeroes.filter(hero => {
-        return !hero.isDisplayed;
-    });
+    const nonDisplayedHeroes = this.props.displayedHeroes.filter(hero =>
+      !hero.isDisplayed
+    );
 
     return (
       <form className="add-hero">
         <SelectHero
           nonDisplayedHeroes={nonDisplayedHeroes}
-          selectedValue={this.getSelectValue}
-        />
+          selectedValue={this.getSelectValue} />
         <button className="hero-add-btn" onClick={this.handleClick}>
           Add Hero
         </button>
@@ -40,5 +48,10 @@ class HeroForm extends Component {
     );
   }
 }
+
+HeroForm.propTypes = {
+  onClick: React.PropTypes.func,
+  displayedHeroes: React.PropTypes.array,
+};
 
 export default HeroForm;

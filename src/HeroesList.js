@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+/* components */
 import HeroCard from './HeroCard';
 import SearchBar from './SerachBar';
 import HeroForm from './HeroForm';
+
+/* constants */
 import { HEROES } from './Data';
+
+/* styles */
 import './App.css';
 
-class HeroesList extends Component {
+class HeroesList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,50 +19,72 @@ class HeroesList extends Component {
     this.handleAddHeroClick = this.handleAddHeroClick.bind(this);
 
     this.state = {
-      displayedHeroes: HEROES
-    }
+      displayedHeroes: HEROES,
+    };
   }
 
+  /**
+   * Handle onSearch event for the Search Bar.
+   */
   handleSearch(e) {
     const searchQuery = e.target.value.toLowerCase();
 
     const displayedHeroes = HEROES.filter(hero => {
-      const searchString = hero.name.toLowerCase() + hero.first_appearance.toLowerCase();
+      const searchString = hero.name.toLowerCase() + hero.firstAppearance.toLowerCase();
 
       return searchString.indexOf(searchQuery) !== -1;
     });
 
     this.setState({
-      displayedHeroes
+      displayedHeroes,
     });
   }
 
-  handleAddHeroClick(e) {
-    console.log('click!');
+  /**
+   * Add new hero with given id to heroes list.
+   */
+  handleAddHeroClick(id) {
+    const newHero = HEROES.filter(hero => {
+      if (parseInt(hero.id, 10) === parseInt(id, 10)) {
+        hero.isDisplayed = true;
+      }
+      return hero.isDisplayed;
+    });
+
+    const displayedHeroes = this.state.displayedHeroes;
+    displayedHeroes.push(newHero[0]);
+
+    this.setState({
+      displayedHeroes,
+    });
   }
 
   render() {
-    const heroCards = this.state.displayedHeroes.map( hero => {
-      if (hero.isDisplayed) {
-        return (
-          <HeroCard
-            key={hero.id}
-            name={hero.name}
-            first_appearance={hero.first_appearance}
-            image={hero.image}
-            side={hero.side}
-          />
-        );
+    /* Display heroes with property isDisplayed = true */
+    const heroCards = this.state.displayedHeroes.map(hero => {
+      if (!hero.isDisplayed) {
+        return false;
       }
+      return (
+        <HeroCard
+          key={hero.id}
+          name={hero.name}
+          firstAppearance={hero.firstAppearance}
+          image={hero.image}
+          side={hero.side} />
+      );
     });
 
     return (
       <div>
-        <SearchBar onSearch={this.handleSearch} />
+        <SearchBar
+          onSearch={this.handleSearch} />
         <div className="heroes-list">
-            {heroCards}
+          {heroCards}
         </div>
-        <HeroForm onClick={this.handleAddHeroClick} displayedHeroes={this.state.displayedHeroes} />
+        <HeroForm
+          onClick={this.handleAddHeroClick}
+          displayedHeroes={this.state.displayedHeroes} />
       </div>
     );
   }
