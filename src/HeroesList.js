@@ -6,7 +6,7 @@ import SearchBar from './SerachBar';
 import HeroForm from './HeroForm';
 
 /* constants */
-import { HEROES } from './Data';
+import HEROES from './Data';
 
 /* styles */
 import './App.css';
@@ -19,7 +19,8 @@ class HeroesList extends React.Component {
     this.handleAddHeroClick = this.handleAddHeroClick.bind(this);
 
     this.state = {
-      displayedHeroes: HEROES,
+      displayedHeroes: HEROES.filter(hero => hero.isDisplayed),
+      nonDisplayedHeroes: HEROES.filter(hero => !hero.isDisplayed),
     };
   }
 
@@ -44,36 +45,35 @@ class HeroesList extends React.Component {
    * Add new hero with given id to heroes list.
    */
   handleAddHeroClick(id) {
-    const newHero = HEROES.filter(hero => {
-      if (parseInt(hero.id, 10) === parseInt(id, 10)) {
-        hero.isDisplayed = true;
-      }
-      return hero.isDisplayed;
-    });
+    /* get full info of current hero by id */
+    const heroToDisplay = this.state.nonDisplayedHeroes.filter(hero => (
+      parseInt(hero.id, 10) === parseInt(id, 10)
+    ));
 
+    /* push current hero to displayedHeroes[] array */
     const displayedHeroes = this.state.displayedHeroes;
-    displayedHeroes.push(newHero[0]);
+    displayedHeroes.push(heroToDisplay[0]);
+
+    /* remove current hero from nonDisplayedHeroes[] array */
+    const nonDisplayedHeroes = this.state.nonDisplayedHeroes;
+    const index = nonDisplayedHeroes.indexOf(heroToDisplay[0]);
+    nonDisplayedHeroes.splice(index, 1);
 
     this.setState({
       displayedHeroes,
+      nonDisplayedHeroes,
     });
   }
 
   render() {
-    /* Display heroes with property isDisplayed = true */
-    const heroCards = this.state.displayedHeroes.map(hero => {
-      if (!hero.isDisplayed) {
-        return false;
-      }
-      return (
-        <HeroCard
-          key={hero.id}
-          name={hero.name}
-          firstAppearance={hero.firstAppearance}
-          image={hero.image}
-          side={hero.side} />
-      );
-    });
+    const heroCards = this.state.displayedHeroes.map(hero => (
+      <HeroCard
+        key={hero.id}
+        name={hero.name}
+        firstAppearance={hero.firstAppearance}
+        image={hero.image}
+        side={hero.side} />
+    ));
 
     return (
       <div>
@@ -84,7 +84,7 @@ class HeroesList extends React.Component {
         </div>
         <HeroForm
           onClick={this.handleAddHeroClick}
-          displayedHeroes={this.state.displayedHeroes} />
+          nonDisplayedHeroes={this.state.nonDisplayedHeroes} />
       </div>
     );
   }

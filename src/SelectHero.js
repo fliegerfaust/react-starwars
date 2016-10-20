@@ -5,35 +5,23 @@ class SelectHero extends React.Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-
-    this.state = {
-      selectedValue: '',
-    };
   }
 
   /**
    * Handle <select> onChange event and call <HeroForm /> component's action.
    */
   handleChange(e) {
-    const self = this;
-    this.setState({
-      selectedValue: e.target.value,
-    },
-      () => self.props.selectedValue(this.state.selectedValue)
-    );
+    this.props.selectedValue(e.target.value);
   }
 
   render() {
-    /* get array of non-displayed heroes */
-    const nonDisplayedHeroes = this.props.nonDisplayedHeroes;
-
     return (
       <select
-        value={this.state.selectedValue}
+        value={this.props.defaultValue}
         onChange={this.handleChange}
         className="hero-select">
         {
-          nonDisplayedHeroes.map(hero =>
+          this.props.nonDisplayedHeroes.map(hero =>
             <option key={hero.id} value={hero.id}>{hero.name}</option>
           )
         }
@@ -43,6 +31,7 @@ class SelectHero extends React.Component {
 }
 
 SelectHero.propTypes = {
+  selectedValue: React.PropTypes.func,
   nonDisplayedHeroes: React.PropTypes.array,
 };
 

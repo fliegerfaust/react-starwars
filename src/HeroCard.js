@@ -1,5 +1,9 @@
 import React from 'react';
+
+/* modules */
 import classNames from 'classnames';
+
+/* styles */
 import './App.css';
 
 class HeroCard extends React.Component {
